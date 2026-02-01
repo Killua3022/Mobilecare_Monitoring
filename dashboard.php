@@ -46,6 +46,8 @@ $conn->close();
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MobileCare | Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 <link rel="stylesheet" href="css/style.css">
 <style>
 /* Quick inline styles for chat images */
@@ -67,27 +69,56 @@ $conn->close();
     </form>
 </div>
 
+<!-- Dashboard Main Grid -->
 <div class="main">
     <div class="grid">
-        <a href="<?= BASE_URL ?>Chubb/chubb.php" class="card"><div class="icon chubb">🛡️</div><h3>Chubb</h3><p>Manage Chubb claims</p></a>
-        <a href="<?= BASE_URL ?>Escalations/escalations.php" class="card"><div class="icon escalation">🚨</div><h3>Escalations</h3><p>View escalated cases</p></a>
-        <a href="<?= BASE_URL ?>Inventory/inventory.php" class="card"><div class="icon settings">📦</div><h3>Inventory</h3><p>Track stock</p></a>
+        <a href="<?= BASE_URL ?>Chubb/chubb.php" class="card">
+            <div class="icon chubb"><i class='bx bx-shield'></i></div>
+            <h3>Chubb</h3>
+            <p>Manage Chubb claims</p>
+        </a>
+
+        <a href="<?= BASE_URL ?>Escalations/escalations.php" class="card">
+            <div class="icon escalation"><i class='bx bx-bell'></i></div>
+            <h3>Escalations</h3>
+            <p>View escalated cases</p>
+        </a>
+
+        <a href="<?= BASE_URL ?>Inventory/inventory.php" class="card">
+            <div class="icon inventory"><i class='bx bx-box'></i></div>
+            <h3>Inventory</h3>
+            <p>Track stock</p>
+        </a>
+
         <?php if($isAdmin): ?>
-            <a href="<?= BASE_URL ?>Reports/reports.php" class="card"><div class="icon analytics">📊</div><h3>Analytics</h3><p>Reports & trends</p></a>
+            <a href="<?= BASE_URL ?>Reports/reports.php" class="card">
+                <div class="icon analytics"><i class='bx bx-bar-chart-alt-2'></i></div>
+                <h3>Analytics</h3>
+                <p>Reports & trends</p>
+            </a>
         <?php else: ?>
-            <a href="<?= BASE_URL ?>Endorsement_tally/endorsement_tally.php" class="card"><div class="icon tally">📋</div><h3>Endorsements</h3><p>Submit & track</p></a>
+            <a href="<?= BASE_URL ?>Endorsement_tally/endorsement_tally.php" class="card">
+                <div class="icon tally"><i class='bx bx-list-check'></i></div>
+                <h3>Endorsements</h3>
+                <p>Submit & track</p>
+            </a>
         <?php endif; ?>
-        <a href="<?= BASE_URL ?>settings/settings.php" class="card"><div class="icon settings">⚙️</div><h3>Settings</h3><p>Account preferences</p></a>
+
+        <a href="<?= BASE_URL ?>settings/settings.php" class="card">
+            <div class="icon settings"><i class='bx bx-cog'></i></div>
+            <h3>Settings</h3>
+            <p>Account preferences</p>
+        </a>
     </div>
 </div>
 
+
 <!-- Floating Menu -->
 <div class="floating-menu">
-    <button class="menu-btn" id="menuBtn">+</button>
+    <button class="menu-btn" id="menuBtn"><i class='bx bx-plus'></i></button>
     <div class="menu-items" id="menuItems">
-        
-        <a href="<?= BASE_URL ?>about/about_us.php" class="menu-item">ℹ️ About us!</a>
-        <button class="menu-item" id="chatBtn">💬 Chat</button>
+        <a href="<?= BASE_URL ?>about/about_us.php" class="menu-item" title="About Us"><i class='bx bx-info-circle'></i></a>
+        <button class="menu-item" id="chatBtn" title="Chat"><i class='bx bx-chat'></i></button>
     </div>
 </div>
 
@@ -312,3 +343,4 @@ setInterval(loadUsers, 5000);
 
 </body>
 </html>
+

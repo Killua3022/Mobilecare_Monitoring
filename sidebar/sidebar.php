@@ -192,29 +192,5 @@ $profile_image_url = $profile_image
     <a href="/Mobilecare_monitoring/Login/logout.php" class="logout">Logout</a>
 </div>
 
-<!-- FLOATING MENU -->
-<div class="floating-menu">
-    <button class="menu-btn" id="menuBtn">+</button>
 
-    <div class="menu-items" id="menuItems">
-        <?php if(!$isAdmin): ?>
-            <a href="/Mobilecare_Monitoring/Endorsement_tally/endorsement_tally.php" class="menu-item">📋 Endorsement</a>
-        <?php endif; ?>
 
-        <?php if($isAdmin): ?>
-            <a href="/Mobilecare_Monitoring/Reports/reports.php" class="menu-item">📊 Analytics</a>
-        <?php endif; ?>
-
-        <a href="/Mobilecare_Monitoring/Inventory/inventory.php" class="menu-item">📦 Inventory</a>
-    </div>
-</div>
-
-<script>
-const menuBtn = document.getElementById('menuBtn');
-const menuItems = document.getElementById('menuItems');
-
-menuBtn.addEventListener('click', () => {
-    menuBtn.classList.toggle('active');
-    menuItems.classList.toggle('show');
-});
-</script>

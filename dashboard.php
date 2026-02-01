@@ -85,13 +85,7 @@ $conn->close();
 <div class="floating-menu">
     <button class="menu-btn" id="menuBtn">+</button>
     <div class="menu-items" id="menuItems">
-        <?php if(!$isAdmin): ?>
-            <a href="<?= BASE_URL ?>Endorsement_tally/endorsement_tally.php" class="menu-item">📋 Endorsement</a>
-        <?php endif; ?>
-        <?php if($isAdmin): ?>
-            <a href="<?= BASE_URL ?>Reports/reports.php" class="menu-item">📊 Analytics</a>
-        <?php endif; ?>
-        <a href="<?= BASE_URL ?>Inventory/inventory.php" class="menu-item">📦 Inventory</a>
+        
         <a href="<?= BASE_URL ?>about/about_us.php" class="menu-item">ℹ️ About us!</a>
         <button class="menu-item" id="chatBtn">💬 Chat</button>
     </div>

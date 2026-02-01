@@ -8,11 +8,11 @@ error_reporting(E_ALL);
 
 require_once $_SERVER['DOCUMENT_ROOT'].'/Mobilecare_monitoring/config.php';
 
+if (session_status() === PHP_SESSION_NONE) session_start();
 if (!isset($_SESSION['user_id'])) {
     header('Location: ' . BASE_URL . 'Login/index.php');
     exit;
 }
-
 
 $user_id = $_SESSION['user_id'];
 $message = "";
@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_full_name = trim($_POST['full_name'] ?? '');
     $new_personal_id = trim($_POST['personal_id'] ?? '');
     $new_position = trim($_POST['position'] ?? '');
+    $upload_error = false;
 
     if (empty($new_full_name)) {
         $message = "❌ Full Name is required.";
@@ -44,9 +45,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $ext = pathinfo($_FILES['profile_image']['name'], PATHINFO_EXTENSION);
             $filename = 'profile_'.$user_id.'_'.time().'.'.$ext;
             $upload_dir = $_SERVER['DOCUMENT_ROOT'].'/Mobilecare_monitoring/uploads/';
+
             if (!file_exists($upload_dir)) mkdir($upload_dir, 0777, true);
-            if (!move_uploaded_file($_FILES['profile_image']['tmp_name'], $upload_dir.$filename)) {
-                $message = "❌ Failed to upload profile image.";
+
+            if (!is_writable($upload_dir)) {
+                $upload_error = true;
+                $message = "❌ Cannot write to uploads folder. Please check folder permissions.";
+            } elseif (!move_uploaded_file($_FILES['profile_image']['tmp_name'], $upload_dir.$filename)) {
+                $upload_error = true;
+                $message = "❌ Failed to upload profile image. Please check folder permissions.";
             } else {
                 $profile_image = $filename;
             }
@@ -79,7 +86,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $message = "✅ Profile and password updated successfully.";
             }
         } else {
-            if (empty($message)) $message = "✅ Profile updated successfully.";
+            if (empty($message) && !$upload_error) $message = "✅ Profile updated successfully.";
+            if ($upload_error && strpos($message,'❌') === false) {
+                $message = "✅ Profile updated successfully, but image upload failed.";
+            }
         }
     }
 }

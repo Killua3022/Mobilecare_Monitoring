@@ -162,6 +162,7 @@ const attachFile = document.getElementById('attachFile');
 const menuBtn = document.getElementById('menuBtn');
 const menuItems = document.getElementById('menuItems');
 
+
 menuBtn.addEventListener('click', () => {
     menuBtn.classList.toggle('active');
     menuItems.classList.toggle('show');
@@ -235,28 +236,30 @@ function sendMessage(){
 
 sendChat.addEventListener('click', sendMessage);
 chatInput.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); sendMessage(); }});
-
 function loadMessages() {
     if (selectedUserId === null) return;
+
+    // Check if user is near the bottom
+    const isNearBottom = chatBody.scrollHeight - chatBody.scrollTop - chatBody.clientHeight < 50;
 
     fetch('messages/fetch_messages.php?user_id=' + selectedUserId)
         .then(res => res.json())
         .then(data => {
+            // Save current scroll position from bottom
+            const scrollFromBottom = chatBody.scrollHeight - chatBody.scrollTop;
+
             chatBody.innerHTML = '';
             data.forEach(msg => {
                 const div = document.createElement('div');
                 div.classList.add('message', msg.sender_id == userId ? 'admin' : 'user');
 
-                // Sender name
                 const nameSpan = document.createElement('div');
                 nameSpan.className = 'sender-name';
                 nameSpan.textContent = msg.sender_id == userId ? 'You' : msg.sender_name;
                 div.appendChild(nameSpan);
 
-                // Message text or file
                 const msgText = document.createElement('div');
                 msgText.className = 'message-text';
-
                 if(msg.message) msgText.textContent = msg.message;
                 if(msg.file_name && msg.file_path){
                     const link = document.createElement('a');
@@ -271,7 +274,6 @@ function loadMessages() {
                     } else link.textContent = msg.file_name;
                     msgText.appendChild(link);
                 }
-
                 div.appendChild(msgText);
 
                 if(msg.sender_id == userId){
@@ -283,7 +285,14 @@ function loadMessages() {
 
                 chatBody.appendChild(div);
             });
-            chatBody.scrollTop = chatBody.scrollHeight;
+
+            // Auto-scroll if user was near the bottom
+            if(isNearBottom){
+                chatBody.scrollTop = chatBody.scrollHeight;
+            } else {
+                // If user scrolled up (back-reading), maintain their position
+                chatBody.scrollTop = chatBody.scrollHeight - scrollFromBottom;
+            }
 
             // Mark messages as read
             fetch('messages/mark_read.php',{
@@ -293,6 +302,7 @@ function loadMessages() {
             });
         });
 }
+
 
 <?php if($isAdmin): ?>
 function loadUsers(){

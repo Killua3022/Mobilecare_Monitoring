@@ -9,8 +9,6 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = intval($_SESSION['user_id']);
 
-$conn = new mysqli("localhost", "root", "", "Mobilecare_monitoring");
-if ($conn->connect_error) die('DB Connection failed: ' . $conn->connect_error);
 
 // Update last activity
 $stmt = $conn->prepare("UPDATE users SET last_activity=NOW() WHERE id=?");
@@ -61,7 +59,7 @@ $conn->close();
 
 <div class="header">
     <div>
-        <h1>Welcome 👋</h1>
+        <h1>Welcome!</h1>
         <p><?= htmlspecialchars($email) ?> • Site: <?= htmlspecialchars($site) ?></p>
     </div>
     <form action="<?= BASE_URL ?>Login/logout.php" method="post">

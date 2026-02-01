@@ -7,10 +7,8 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$conn = new mysqli('localhost','root','','Mobilecare_monitoring');
-if ($conn->connect_error) {
-    die('Database connection failed');
-}
+require_once $_SERVER['DOCUMENT_ROOT'].'/Mobilecare_monitoring/config.php';
+
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die('Invalid request');

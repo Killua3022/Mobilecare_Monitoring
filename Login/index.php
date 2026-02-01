@@ -1,13 +1,12 @@
 <?php
-session_start();
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 /* =====================
    DATABASE CONNECTION
 ===================== */
-$conn = new mysqli('localhost', 'root', '', 'Mobilecare_monitoring');
-if ($conn->connect_error) {
-    die('Database connection failed: ' . $conn->connect_error);
-}
+require_once $_SERVER['DOCUMENT_ROOT'].'/Mobilecare_monitoring/config.php';
+
 
 $error = $success = '';
 

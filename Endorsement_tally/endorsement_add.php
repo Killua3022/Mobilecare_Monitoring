@@ -14,11 +14,8 @@ if(!isset($_SESSION['user_id'])){
 /* ===============================
    DB CONNECTION
 ================================ */
-$conn = new mysqli("localhost","root","","Mobilecare_monitoring");
-if($conn->connect_error){
-    echo json_encode(['success'=>false,'message'=>'DB connection failed']);
-    exit;
-}
+require_once $_SERVER['DOCUMENT_ROOT'].'/Mobilecare_monitoring/config.php';
+
 
 /* ===============================
    GET POST DATA

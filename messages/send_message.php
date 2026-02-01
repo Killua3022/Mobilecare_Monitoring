@@ -1,5 +1,5 @@
 <?php
-require_once '../config.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/Mobilecare_monitoring/config.php';
 
 if (session_status() === PHP_SESSION_NONE) session_start();
 $user_id = $_SESSION['user_id'] ?? null;
@@ -16,11 +16,7 @@ if (!$receiver_id) {
     exit;
 }
 
-$conn = new mysqli("localhost", "root", "", "Mobilecare_monitoring");
-if ($conn->connect_error) {
-    echo json_encode(['status'=>'error','message'=>'DB connection failed']);
-    exit;
-}
+
 
 // Initialize variables
 $message = $_POST['message'] ?? null;

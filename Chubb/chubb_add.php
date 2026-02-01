@@ -12,10 +12,8 @@ if (!isset($_SESSION['user_id'])) {
 /* ===============================
    DB CONNECTION
 ================================ */
-$conn = new mysqli("localhost", "root", "", "Mobilecare_monitoring");
-if ($conn->connect_error) {
-    die("DB Connection failed: " . $conn->connect_error);
-}
+require_once $_SERVER['DOCUMENT_ROOT'].'/Mobilecare_monitoring/config.php';
+
 
 /* ===============================
    SESSION DATA

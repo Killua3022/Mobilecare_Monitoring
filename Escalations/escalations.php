@@ -13,13 +13,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-/* =====================
-   DB
-===================== */
-$conn = new mysqli("localhost", "root", "", "Mobilecare_monitoring");
-if ($conn->connect_error) {
-    die("DB Error: " . $conn->connect_error);
-}
+
 
 /* =====================
    USER CONTEXT

@@ -13,8 +13,6 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$conn = new mysqli('localhost', 'root', '', 'Mobilecare_monitoring');
-if ($conn->connect_error) die('Database connection failed');
 
 $user_id = $_SESSION['user_id'];
 $message = "";

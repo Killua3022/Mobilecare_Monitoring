@@ -7,8 +7,6 @@ if (!isset($_SESSION['user_id']) || ($_SESSION['role'] ?? '') !== 'admin') {
     die("Access denied. Only admin can manage sites.");
 }
 
-$conn = new mysqli('localhost', 'root', '', 'Mobilecare_monitoring');
-if ($conn->connect_error) die("DB Error: " . $conn->connect_error);
 
 // =====================
 // HANDLE ADD / EDIT / DELETE

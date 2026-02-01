@@ -3,10 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 $current = basename($_SERVER['PHP_SELF']);
-
-// Database connection
-$conn = new mysqli('localhost','root','','Mobilecare_monitoring');
-if ($conn->connect_error) die("Database error: ".$conn->connect_error);
+require_once $_SERVER['DOCUMENT_ROOT'].'/Mobilecare_monitoring/config.php';
 
 // Get user info
 $user_id = $_SESSION['user_id'] ?? 0;

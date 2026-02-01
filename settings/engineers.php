@@ -13,11 +13,6 @@ if (!isset($_SESSION['user_id'])) {
 $isAdmin = ($_SESSION['email'] ?? '') === 'admin@mobilecare.com';
 if (!$isAdmin) die("Access denied. Only admin can manage users.");
 
-/* =====================
-   DB CONNECTION
-===================== */
-$conn = new mysqli('localhost', 'root', '', 'Mobilecare_monitoring');
-if ($conn->connect_error) die("DB Error: " . $conn->connect_error);
 
 /* =====================
    UPDATE ACTIVITY
